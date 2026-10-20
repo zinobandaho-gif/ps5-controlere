@@ -1,0 +1,24 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: 'Anton'; src: url('assets/fonts/anton.woff2') format('woff2'); font-weight: 400; }
+#t { font: 400 230px Anton; position: absolute; white-space: nowrap; visibility: hidden; }
+</style>
+<div id="t">CNTRL</div>
+<script>
+Promise.resolve(document.fonts.load('400 230px Anton')).then(function () {
+  var el = document.getElementById('t');
+  var r = el.getBoundingClientRect();
+  var c = document.createElement('canvas').getContext('2d');
+  c.font = '400 230px Anton';
+  var m = c.measureText('CNTRL');
+  el.setAttribute('data-metrics', JSON.stringify({
+    advance: +m.width.toFixed(1),
+    inkLeft: +m.actualBoundingBoxLeft.toFixed(1),
+    inkRight: +m.actualBoundingBoxRight.toFixed(1),
+    ascent: +m.actualBoundingBoxAscent.toFixed(1),
+    descent: +m.actualBoundingBoxDescent.toFixed(1),
+    boxW: +r.width.toFixed(1)
+  }));
+});
+</script>
